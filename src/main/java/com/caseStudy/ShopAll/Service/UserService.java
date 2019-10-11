@@ -31,4 +31,8 @@ public class UserService {
         repo.save(user);
         return "added";
     }
+    public Users findByUserId(Long userId)
+    {
+         return  repo.findByUserId(userId);
+    }
 }

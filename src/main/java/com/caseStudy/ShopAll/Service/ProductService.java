@@ -45,4 +45,5 @@ public List<Products> findByPriceOfAll(double min, double max)
 {
     return prodRepo.findByPriceBetween(min,max);
 }
+
 }
