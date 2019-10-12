@@ -102,6 +102,7 @@ public class CartService {
         for(Cart car: cartL)
         {
             OrderHistory oh = new OrderHistory();
+            oh.setImage(car.getProducts().getImage());
             oh.setUserId(car.getUsers().getUserId());
             oh.setQuantity(car.getQuantity());
             oh.setPrice(car.getProducts().getPrice());
