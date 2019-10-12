@@ -4,6 +4,7 @@ import com.caseStudy.ShopAll.Repository.userRepository;
 import com.caseStudy.ShopAll.Service.CartService;
 import com.caseStudy.ShopAll.Service.UserService;
 import com.caseStudy.ShopAll.model.Cart;
+import com.caseStudy.ShopAll.model.OrderHistory;
 import com.caseStudy.ShopAll.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -54,5 +55,11 @@ public class cartController {
         return cartS.deleteProduct(principal,productId);
     }
 
+    @GetMapping("/checkOut")
+    public List<OrderHistory> checkout(Principal principal)
+    {
+        System.out.println(cartS.checkOut(principal).toString());
+        return cartS.checkOut(principal);
+    }
 
 }

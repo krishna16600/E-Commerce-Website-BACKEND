@@ -1,16 +1,21 @@
 package com.caseStudy.ShopAll.Service;
 
 import com.caseStudy.ShopAll.Repository.cartRepository;
+import com.caseStudy.ShopAll.Repository.orderRepo;
 import com.caseStudy.ShopAll.Repository.productRepository;
 import com.caseStudy.ShopAll.Repository.userRepository;
 import com.caseStudy.ShopAll.model.Cart;
+import com.caseStudy.ShopAll.model.OrderHistory;
 import com.caseStudy.ShopAll.model.Products;
 import com.caseStudy.ShopAll.model.Users;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CartService {
@@ -21,6 +26,8 @@ public class CartService {
     private UserService userS;
     @Autowired
     private cartRepository cart;
+    @Autowired
+    private orderRepo OR;
     public String addProduct(Long userid, Long productid)
     {
         Products prod = prodS.getProductById(productid);
@@ -86,5 +93,23 @@ public class CartService {
         System.out.println("decreased");
        return "\"Decreased\"";
 
+    }
+
+    public List<OrderHistory> checkOut(Principal principal)
+    {
+       Users  user = userS.getUserByEmail(principal.getName());
+        List<Cart> cartL = cart.findByUsers(user);
+        for(Cart car: cartL)
+        {
+            OrderHistory oh = new OrderHistory();
+            oh.setUserId(car.getUsers().getUserId());
+            oh.setQuantity(car.getQuantity());
+            oh.setPrice(car.getProducts().getPrice());
+            oh.setItemName(car.getProducts().getName());
+            oh.setDate(new Date());
+            cart.delete(car);
+            OR.saveAndFlush(oh);
+        }
+        return OR.findByUserId(user.getUserId());
     }
 }
