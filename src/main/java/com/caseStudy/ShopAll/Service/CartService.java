@@ -108,6 +108,7 @@ public class CartService {
             oh.setPrice(car.getProducts().getPrice());
             oh.setItemName(car.getProducts().getName());
             oh.setDate(new Date());
+            oh.setProdId(car.getProducts().getProductId());
             cart.delete(car);
             OR.saveAndFlush(oh);
         }

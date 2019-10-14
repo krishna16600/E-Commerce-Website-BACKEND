@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -60,5 +61,16 @@ public class UserController {
         }
         return "/home";
 
+    }
+
+    @GetMapping("/getUser")
+    public Users getCurrentUser(Principal principal)
+    {
+       return userS.getuserProfile(principal);
+    }
+    @PostMapping("/editUser")
+    public Users editCurrentUser(@RequestBody Users user)
+    {
+        return userS.editUserProfile(user);
     }
 }

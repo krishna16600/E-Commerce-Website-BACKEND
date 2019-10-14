@@ -14,6 +14,15 @@ public class OrderHistory {
     private Long id;
     private String itemName;
     private String image;
+private Long prodId;
+
+    public Long getProdId() {
+        return prodId;
+    }
+
+    public void setProdId(Long prodId) {
+        this.prodId = prodId;
+    }
 
     public String getImage() {
         return image;

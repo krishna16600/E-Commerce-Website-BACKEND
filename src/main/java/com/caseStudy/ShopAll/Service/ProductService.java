@@ -45,5 +45,15 @@ public List<Products> findByPriceOfAll(double min, double max)
 {
     return prodRepo.findByPriceBetween(min,max);
 }
-
+public Products editPro(Products prod)
+{
+    Products pr = prodRepo.findByProductId(prod.getProductId());
+    pr.setCategory(prod.getCategory());
+    pr.setDetails(prod.getDetails());
+    pr.setName(prod.getName());
+    pr.setPrice(prod.getPrice());
+    pr.setImage(prod.getImage());
+    prodRepo.saveAndFlush(pr);
+    return pr;
+}
 }

@@ -29,6 +29,15 @@ public class ProductController {
         return prodS.addProduct(prod);
     }
 
+    @PostMapping("/editProducts")
+    public Products editPr(@RequestBody Products prod)
+    {
+        System.out.println(prod.toString());
+        System.out.println("After edit" + prodS.editPro(prod).toString());
+        return prodS.editPro(prod);
+
+    }
+
     @DeleteMapping("/deleteProducts/{id}")
     public String deleteProduct(@PathVariable("id") Long id)
     {
