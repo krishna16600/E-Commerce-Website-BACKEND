@@ -5,7 +5,9 @@ import com.caseStudy.ShopAll.model.Products;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class ProductService {
@@ -56,4 +58,20 @@ public Products editPro(Products prod)
     prodRepo.saveAndFlush(pr);
     return pr;
 }
+    public Set<Products> getSearchedData(String searchedItem) {
+        List<Products> productsList = prodRepo.findAll();
+        Set<Products> result = new HashSet<>();
+
+        for(int i=0; i<productsList.size(); i++) {
+            if(productsList.get(i).getName().toLowerCase().contains(searchedItem.toLowerCase()) ||
+                    productsList.get(i).getCategory().toLowerCase().contains(searchedItem.toLowerCase()) ||
+                    productsList.get(i).getDetails().toLowerCase().contains(searchedItem.toLowerCase())) {
+
+                result.add(productsList.get(i));
+            }
+        }
+        //System.out.println("Search result yha tak");
+        return result;
+    }
+
 }

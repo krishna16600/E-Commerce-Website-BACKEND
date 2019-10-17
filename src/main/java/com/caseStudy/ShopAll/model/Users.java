@@ -13,7 +13,7 @@ public class Users {
     private String password;
     private String mobile;
     private String gender;
-    private String role="Admin";
+    private String role="customer";
     private String Address;
 
     public String getAddress() {

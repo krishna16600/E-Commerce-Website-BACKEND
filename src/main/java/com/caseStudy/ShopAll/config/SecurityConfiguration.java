@@ -43,6 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/products/{productId}").permitAll()
                 .antMatchers("/allProducts/{min}/{max}").permitAll()
                 .antMatchers("/allProducts/{category}/{min}/{max}").permitAll()
+                .antMatchers("/search/{searchedItem}").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic();
         http.cors();

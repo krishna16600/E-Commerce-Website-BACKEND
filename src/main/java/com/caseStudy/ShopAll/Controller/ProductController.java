@@ -8,6 +8,7 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200" , allowedHeaders = "*")
@@ -68,5 +69,14 @@ public class ProductController {
     public List<Products> getByPrice(@PathVariable("min") double min, @PathVariable("max")double max)
     {
         return prodS.findByPriceOfAll(min,max);
+    }
+
+    @GetMapping("/search/{searchedItem}")
+    public Set<Products> searchItem(@PathVariable("searchedItem") String searchedItem) {
+        Set<Products> prod = prodS.getSearchedData(searchedItem);
+        for (int i = 0; i < prod.size(); i++) {
+            System.out.println(prod);
+        }
+        return prod;
     }
 }
